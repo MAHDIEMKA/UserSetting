@@ -1,6 +1,6 @@
 ﻿namespace UserSetting.Models
 {
-    public class User
+    public class UserApp
     {
         public Guid Id { get; set; }
         public string? UserName { get; set; }

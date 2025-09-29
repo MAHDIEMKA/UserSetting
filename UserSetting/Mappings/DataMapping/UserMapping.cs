@@ -2,11 +2,11 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using UserSetting.Models;
 
-namespace UserSetting.Mappings
+namespace UserSetting.Mappings.DataMapping
 {
-    public class UserMapping : IEntityTypeConfiguration<User>
+    public class UserMapping : IEntityTypeConfiguration<UserApp>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<UserApp> builder)
         {
             builder.ToTable("Users");
 

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using UserSetting.Mappings;
+using UserSetting.Mappings.DataMapping;
 using UserSetting.Models;
 
 namespace UserSetting.Data
@@ -11,7 +11,7 @@ namespace UserSetting.Data
             
         }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<UserApp> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

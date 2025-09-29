@@ -44,9 +44,9 @@ namespace UserSetting.Repositories
             _dbSet.Remove(entity);
         }
 
-        public Task SaveChange()
+        public async Task SaveAsync()
         {
-            return _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
     }
 }

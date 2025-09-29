@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using UserSetting.Data;
 using UserSetting.Repositories;
+using UserSetting.Repositories.UnitOfWork;
+using UserSetting.Repositories.User;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 );
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
+builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 
