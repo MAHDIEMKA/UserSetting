@@ -13,14 +13,14 @@ namespace UserSetting.Repositories.User
             _context = context;
         }
 
-        public async Task<UserApp> GetUserNameAsync(string userName)
+        public async Task<UserApp> GetUserNameAsync(string userName, string password)
         {
-            return await _context.Users.FirstOrDefaultAsync(x => x.UserName == userName || x.Email == userName);
+            return await _context.Users.FirstOrDefaultAsync(x => (x.UserName == userName || x.Email == userName) && x.Password == password);
         }
 
         public async Task<UserApp> LoginAsync(string userName, string password)
         {
-            var user = await GetUserNameAsync(userName);
+            var user = await GetUserNameAsync(userName, password);
             if(user == null)
             {
                 return null;

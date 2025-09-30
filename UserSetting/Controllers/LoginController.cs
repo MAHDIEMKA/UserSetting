@@ -25,7 +25,7 @@ namespace UserSetting.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(string username, string email, string password)
         {
-            var existingUser = await _unitOfWork.Users.GetUserNameAsync(username);
+            var existingUser = await _unitOfWork.Users.GetUserNameAsync(username, password);
             if(existingUser != null)
             {
                 return BadRequest("Username is exists");
@@ -45,10 +45,10 @@ namespace UserSetting.Controllers
             return Ok(new {message = "User registered"});
         }
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login(string username, string password)
+        [HttpPost]
+        public async Task<IActionResult> Login([FromBody] UserApp userApp)
         {
-            var user = await _unitOfWork.Users.LoginAsync(username, password);
+            var user = await _unitOfWork.Users.LoginAsync(userApp.UserName, userApp.Password);
 
             if(user == null)
             {
