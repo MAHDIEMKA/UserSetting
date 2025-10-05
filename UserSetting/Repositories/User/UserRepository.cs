@@ -18,14 +18,5 @@ namespace UserSetting.Repositories.User
             return await _context.Users.FirstOrDefaultAsync(x => (x.UserName == userName || x.Email == userName) && x.Password == password);
         }
 
-        public async Task<UserApp> LoginAsync(string userName, string password)
-        {
-            var user = await GetUserNameAsync(userName, password);
-            if(user == null)
-            {
-                return null;
-            }
-            return user;
-        }
     }
 }

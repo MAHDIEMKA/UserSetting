@@ -3,6 +3,7 @@ using UserSetting.Data;
 using UserSetting.Repositories;
 using UserSetting.Repositories.UnitOfWork;
 using UserSetting.Repositories.User;
+using UserSetting.Services.Login;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<ILoginServices, LoginServices>();
 
 
 builder.Services.AddAutoMapper(typeof(Program));
