@@ -7,6 +7,7 @@ using UserSetting.Models;
 using UserSetting.Repositories;
 using UserSetting.Repositories.UnitOfWork;
 using UserSetting.Services.Login;
+using UserSetting.Services.Register;
 
 namespace UserSetting.Controllers
 {
@@ -15,34 +16,22 @@ namespace UserSetting.Controllers
     public class LoginController : ControllerBase
     {
         private readonly ILoginServices _loginServices;
+        private readonly IRegisterServices _registerServices;
 
-        public LoginController(ILoginServices loginServices)
+        public LoginController(ILoginServices loginServices, IRegisterServices registerServices)
         {
             _loginServices = loginServices;
+            _registerServices = registerServices;
         }
 
-        //[HttpPost("register")]
-        //public async Task<IActionResult> Register(string username, string email, string password)
-        //{
-        //    var existingUser = await _unitOfWork.Users.GetUserNameAsync(username, password);
-        //    if(existingUser != null)
-        //    {
-        //        return BadRequest("Username is exists");
-        //    }
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] UserApp user)
+        {
 
-        //    var user = new UserApp
-        //    {
-        //        UserName = username,
-        //        Email = email,
-        //        Password = password
-        //    };
-        //    //var user = _mapper.Map<UserApp>(registerDto);
+            await _registerServices.RegisterAsync(user.UserName, user.Email, user.Password);
 
-        //    await _unitOfWork.Users.AddAsync(user);
-        //    await _unitOfWork.SaveAsync();
-
-        //    return Ok(new {message = "User registered"});
-        //}
+            return Ok(new { message = "ثبت نام شما با موفقیت انجام شد :)" });
+        }
 
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] UserApp userApp)
@@ -51,10 +40,10 @@ namespace UserSetting.Controllers
             
             if(user == null)
             {
-                return Unauthorized(new {message = "Invalid username or password" });
+                return Unauthorized(new {message = "کاربری با این مشخصات وجود ندارد" });
             }
 
-            return Ok(new {message = "Login seccesful", user = user.UserName});
+            return Ok(new {message = "ورود موفقیت آمیز (:", user = user.UserName});
         }
     }
 }

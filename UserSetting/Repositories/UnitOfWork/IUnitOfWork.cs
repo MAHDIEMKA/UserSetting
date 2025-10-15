@@ -1,4 +1,5 @@
-﻿using UserSetting.Repositories.User;
+﻿using UserSetting.Models;
+using UserSetting.Repositories.User;
 
 namespace UserSetting.Repositories.UnitOfWork
 {

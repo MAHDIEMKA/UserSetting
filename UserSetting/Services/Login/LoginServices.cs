@@ -7,7 +7,7 @@ namespace UserSetting.Services.Login
     public class LoginServices : ILoginServices
     {
 
-        private readonly IUserRepository _repo;
+        private readonly IUserRepository _repo; 
 
         public LoginServices(IUserRepository repository)
         {
