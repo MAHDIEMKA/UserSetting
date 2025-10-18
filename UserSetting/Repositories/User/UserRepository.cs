@@ -10,13 +10,11 @@ namespace UserSetting.Repositories.User
     {
         private readonly AppDbContext _context;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger<UserRepository> _logger;
 
-        public UserRepository(AppDbContext context, IUnitOfWork unitOfWork, ILogger<UserRepository> logger) : base(context)
+        public UserRepository(AppDbContext context, IUnitOfWork unitOfWork) : base(context)
         {
             _context = context;
             _unitOfWork = unitOfWork;
-            _logger = logger;
         }
 
         public async Task<UserApp> GetUserNameAsync(string userName, string password)

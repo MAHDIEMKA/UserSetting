@@ -8,14 +8,13 @@ namespace UserSetting.Repositories.UnitOfWork
     {
         private readonly AppDbContext _context;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger<UserRepository> _logger;
 
         public IUserRepository Users { get; private set; }
 
         public UnitOfWork(AppDbContext context)
         {
             _context = context;
-            Users = new UserRepository(_context, _unitOfWork, _logger);
+            Users = new UserRepository(_context, _unitOfWork);
         }
 
         public async Task<int> SaveAsync()
