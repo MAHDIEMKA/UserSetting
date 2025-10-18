@@ -33,7 +33,7 @@ namespace UserSetting.Controllers
             return Ok(new { message = "ثبت نام شما با موفقیت انجام شد :)" });
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserApp userApp)
         {
             var user = await _loginServices.LoginAsync(userApp.UserName, userApp.Password);

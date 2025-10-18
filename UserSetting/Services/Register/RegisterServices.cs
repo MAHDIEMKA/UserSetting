@@ -16,7 +16,7 @@ namespace UserSetting.Services.Register
 
         public async Task<UserApp> RegisterAsync(string userName, string email, string password)
         {
-            var existingUser = _userRepository.GetUserNameAsync(userName,password);
+            var existingUser = await _userRepository.GetUserNameAsync(userName,password);
             if(existingUser != null)
             {
                 throw new Exception("کاربر با این مشخصات وجود دارد");
