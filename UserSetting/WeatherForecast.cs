@@ -1,4 +1,4 @@
-namespace UserSetting
+namespace UserManagement
 {
     public class WeatherForecast
     {

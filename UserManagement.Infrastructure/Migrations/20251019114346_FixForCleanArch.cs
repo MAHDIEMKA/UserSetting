@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace UserManagement.Migrations
+namespace UserManagement.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class initdatabase : Migration
+    public partial class FixForCleanArch : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

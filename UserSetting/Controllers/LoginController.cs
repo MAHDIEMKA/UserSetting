@@ -1,15 +1,9 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿
 using Microsoft.AspNetCore.Mvc;
-using UserSetting.Data;
-using UserSetting.Models;
-using UserSetting.Repositories;
-using UserSetting.Repositories.UnitOfWork;
-using UserSetting.Services.Login;
-using UserSetting.Services.Register;
+using UserManagement.Applicaton.Interfaces;
+using UserManagement.Domain.Entities;
 
-namespace UserSetting.Controllers
+namespace UserManagement.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -17,6 +11,7 @@ namespace UserSetting.Controllers
     {
         private readonly ILoginServices _loginServices;
         private readonly IRegisterServices _registerServices;
+        
 
         public LoginController(ILoginServices loginServices, IRegisterServices registerServices)
         {
@@ -25,18 +20,18 @@ namespace UserSetting.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] UserApp user)
+        public async Task<IActionResult> Register(string user, string email, string password)
         {
 
-            await _registerServices.RegisterAsync(user.UserName, user.Email, user.Password);
+            await _registerServices.RegisterAsync(user, email, password);
 
             return Ok(new { message = "ثبت نام شما با موفقیت انجام شد :)" });
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] UserApp userApp)
+        public async Task<IActionResult> Login([FromBody] User userApp)
         {
-            var user = await _loginServices.LoginAsync(userApp.UserName, userApp.Password);
+            var user = await _loginServices.LoginAsync(userApp.UserName, userApp.PasswordHash);
             
             if(user == null)
             {

@@ -6,27 +6,26 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UserManagement.Infrastructure.Persistence;
-//using UserManagement.Data;
 
 #nullable disable
 
-namespace UserManagement.Migrations
+namespace UserManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251014080734_initdatabase")]
-    partial class initdatabase
+    [Migration("20251019120059_InitialTable")]
+    partial class InitialTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.9")
+                .HasAnnotation("ProductVersion", "9.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("UserManagement.Models.UserApp", b =>
+            modelBuilder.Entity("UserManagement.Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -36,13 +35,16 @@ namespace UserManagement.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("bit")
                         .HasColumnName("IsRemoved");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")

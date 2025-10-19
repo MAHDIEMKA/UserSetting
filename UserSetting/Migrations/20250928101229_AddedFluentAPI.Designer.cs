@@ -5,11 +5,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using UserSetting.Data;
+using UserManagement.Infrastructure.Persistence;
+//using UserManagement.Data;
 
 #nullable disable
 
-namespace UserSetting.Migrations
+namespace UserManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20250928101229_AddedFluentAPI")]
@@ -25,7 +26,7 @@ namespace UserSetting.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("UserSetting.Models.User", b =>
+            modelBuilder.Entity("UserManagement.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

@@ -4,11 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using UserSetting.Data;
+using UserManagement.Infrastructure.Persistence;
+//using UserManagement.Data;
 
 #nullable disable
 
-namespace UserSetting.Migrations
+namespace UserManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -22,7 +23,7 @@ namespace UserSetting.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("UserSetting.Models.UserApp", b =>
+            modelBuilder.Entity("UserManagement.Models.UserApp", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
