@@ -19,9 +19,9 @@ namespace UserManagement.Infrastructure.Services
             _repo = repo;
         }
 
-        public async Task<User> LoginAsync(string userName, string password)
+        public async Task<User> LoginAsync(LoginDTO loginDTO)
         {
-            var user = await _repo.GetUserNameAsync(userName, password);
+            var user = await _repo.GetUserNameAsync(loginDTO.UserName, loginDTO.Password);
 
             return user;
         }

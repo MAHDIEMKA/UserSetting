@@ -10,6 +10,6 @@ namespace UserManagement.Applicaton.Interfaces
 {
     public interface IRegisterServices
     {
-        Task<User> RegisterAsync(string userName, string email, string password);
+        Task<User> RegisterAsync(RegisterDTO registerDTO);
     }
 }

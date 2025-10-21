@@ -10,6 +10,6 @@ namespace UserManagement.Applicaton.Interfaces
 {
     public interface ILoginServices
     {
-        Task<User> LoginAsync(string userName, string password);
+        Task<User> LoginAsync(LoginDTO loginDTO);
     }
 }

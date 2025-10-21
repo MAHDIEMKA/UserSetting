@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using UserManagement.Applicaton.Interfaces;
+using UserManagement.Applicaton.Mappings;
 using UserManagement.Domain.Interfaces;
 using UserManagement.Infrastructure.Persistence;
 using UserManagement.Infrastructure.Repositories;
@@ -27,8 +28,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ILoginServices, LoginServices>();
 builder.Services.AddScoped<IRegisterServices, RegisterServices>();
 
-
-//builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddCors(options =>
 {

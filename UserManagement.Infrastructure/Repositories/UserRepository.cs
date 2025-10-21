@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
+using UserManagement.Applicaton.DTOs;
 using UserManagement.Applicaton.Interfaces;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Interfaces;
@@ -18,7 +19,7 @@ namespace UserManagement.Infrastructure.Repositories
 
         public async Task<User> GetUserNameAsync(string userName, string password)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => (x.UserName == userName || x.PasswordHash == password));
+            var user = await _context.Users.FirstOrDefaultAsync(x => (x.UserName == userName || x.Email == userName));
 
             if (user == null)
                 return null;
@@ -31,13 +32,13 @@ namespace UserManagement.Infrastructure.Repositories
             return user;
         }
 
-        public async Task<User> AddUserAsync(string userName, string email, string password)
+        public async Task<User> AddUserAsync(User userApp)
         {
             User user = new User()
             {
-                UserName = userName.Trim(),
-                Email = email.Trim(),
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(password).Trim()
+                UserName = userApp.UserName.Trim(),
+                Email = userApp.Email.Trim(),
+                PasswordHash = userApp.PasswordHash.Trim()
             };
 
             await _context.Users.AddAsync(user);
