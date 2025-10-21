@@ -21,7 +21,15 @@ namespace UserManagement.Infrastructure.Services
 
         public async Task<User> LoginAsync(LoginDTO loginDTO)
         {
-            var user = await _repo.GetUserNameAsync(loginDTO.UserName, loginDTO.Password);
+            var user = await _repo.GetUserNameAsync(loginDTO.UserName);
+
+            if (user == null)
+                throw new Exception("کاربر با این نام کاربری وجود ندارد");
+
+            bool isPasswordValid = BCrypt.Net.BCrypt.Verify(loginDTO.Password, user.PasswordHash);
+
+            if (!isPasswordValid)
+                throw new Exception("رمز عبور اشتباه است");
 
             return user;
         }

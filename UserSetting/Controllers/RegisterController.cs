@@ -20,10 +20,17 @@ namespace UserManagement.WebAPI.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO registerDTO)
         {
+            try
+            {
+                await _registerServices.RegisterAsync(registerDTO);
 
-            await _registerServices.RegisterAsync(registerDTO);
+                return Ok(new { message = "ثبت نام شما با موفقیت انجام شد :)" });
 
-            return Ok(new { message = "ثبت نام شما با موفقیت انجام شد :)" });
+            }catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            
         }
     }
 }

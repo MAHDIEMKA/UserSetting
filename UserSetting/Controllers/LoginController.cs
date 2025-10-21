@@ -20,14 +20,16 @@ namespace UserManagement.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO)
         {
-            var user = await _loginServices.LoginAsync(loginDTO);
-
-            if (user == null)
+            try
             {
-                return Unauthorized(new { message = "کاربری با این مشخصات وجود ندارد" });
-            }
+                var user = await _loginServices.LoginAsync(loginDTO);
 
-            return Ok(new { message = "ورود موفقیت آمیز (:", user = user.UserName });
+                return Ok(new { message = "ورود موفقیت آمیز (:", user = user.UserName });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new {message = ex.Message});
+            }
         }
     }
 }

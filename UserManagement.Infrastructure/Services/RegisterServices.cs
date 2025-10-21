@@ -26,7 +26,7 @@ namespace UserManagement.Infrastructure.Services
 
         public async Task<User> RegisterAsync(RegisterDTO registerDTO)
         {
-            var existingUser = await _repo.GetUserNameAsync(registerDTO.UserName, registerDTO.Password);
+            var existingUser = await _repo.GetUserNameAsync(registerDTO.UserName);
             if (existingUser != null)
             {
                 throw new Exception("کاربر با این مشخصات وجود دارد");

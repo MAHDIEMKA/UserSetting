@@ -17,17 +17,9 @@ namespace UserManagement.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<User> GetUserNameAsync(string userName, string password)
+        public async Task<User> GetUserNameAsync(string userName)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => (x.UserName == userName || x.Email == userName));
-
-            if (user == null)
-                return null;
-
-            bool isPasswordValid = BCrypt.Net.BCrypt.Verify(password, user.PasswordHash);
-
-            if (!isPasswordValid)
-                return null;
 
             return user;
         }
